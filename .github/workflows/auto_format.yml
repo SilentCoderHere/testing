@@ -1,8 +1,8 @@
-name: Auto Format All Files
+name: Auto Format Changed Files
 
 on:
   push:
-    branches: [main]
+    branches: [ main ]
   pull_request:
 
 jobs:
@@ -23,13 +23,35 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install Prettier
-        run: npm install -g prettier
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
 
-      - name: Format supported files
+      - name: Install formatters
         run: |
-          echo "🧹 Formatting code..."
-          prettier --write "**/*.{js,ts,json,css,scss,md,html,yml,yaml,py}"
+          npm install -g prettier
+          pip install black
+
+      - name: Find and format changed files
+        run: |
+          echo "🔍 Checking changed files..."
+          CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})
+
+          if [ -z "$CHANGED_FILES" ]; then
+            echo "✅ No changed files."
+            exit 0
+          fi
+
+          echo "$CHANGED_FILES" | while read file; do
+            if [[ "$file" == *.py ]]; then
+              echo "🐍 Formatting Python: $file"
+              black "$file"
+            elif [[ "$file" == *.* ]]; then
+              echo "🧹 Formatting other: $file"
+              prettier --write "$file" || true
+            fi
+          done
 
       - name: Commit and push changes (if any)
         run: |
@@ -37,7 +59,7 @@ jobs:
             git config user.name "Format Bot"
             git config user.email "format-bot@github.com"
             git add .
-            git commit -m "Auto format code with Prettier"
+            git commit -m "Auto format changed files (Prettier + Black)"
             git push
           else
             echo "✅ Code already formatted"
