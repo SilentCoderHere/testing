@@ -1,3 +1,2 @@
-def    hello(         msg : str)    -> str               :
-    return             msg
-
+def hello(msg: str) -> str:
+    return msg
