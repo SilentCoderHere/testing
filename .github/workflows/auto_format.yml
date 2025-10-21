@@ -1,0 +1,44 @@
+name: Auto Format All Files
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  format:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Prettier
+        run: npm install -g prettier
+
+      - name: Format supported files
+        run: |
+          echo "🧹 Formatting code..."
+          prettier --write "**/*.{js,ts,json,css,scss,md,html,yml,yaml,py}"
+
+      - name: Commit and push changes (if any)
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            git config user.name "Format Bot"
+            git config user.email "format-bot@github.com"
+            git add .
+            git commit -m "Auto format code with Prettier"
+            git push
+          else
+            echo "✅ Code already formatted"
+          fi
