@@ -1,5 +1,6 @@
 import random
-#the database
+
+# the database
 mobs = [
     ["Zombie", "Undead", "Overworld", "Experience", "Walking"],
     ["Skeleton", "Undead", "Overworld", "Item", "Walking"],
@@ -31,7 +32,7 @@ mobs = [
     ["Spider", "Beast", "Overworld", "Experience", "Walking"],
     ["Husk", "Undead", "Overworld", "Item", "Walking"],
     ["Strider", "Beast", "Nether", "Item", "Walking"],
-    ["Dune Spider", "Beast", "Desert", "Rare", "Walking"]
+    ["Dune Spider", "Beast", "Desert", "Rare", "Walking"],
 ]
 ff = [
     ["Alok", "Street", "Active", "Healing", "SMG"],
@@ -63,61 +64,56 @@ ff = [
     ["Tatsuya", "Rebel", "Active", "Speed", "SMG"],
     ["Sonia", "Futuristic", "Active", "Defense", "AR"],
     ["Otho", "Psychic", "Passive", "Detection", "Sniper"],
-    ["Clash", "Military", "Passive", "Accuracy", "AR"]
+    ["Clash", "Military", "Passive", "Accuracy", "AR"],
 ]
+
+
 def start():
-      global d,sent
-      print("Welcome Users")
-      print("1. Guess the mob"
-      "\n2. Guess the character")
-      c = int(input("Enter your choice :"))
-      if c == 1:
-            d = mobs
-            sent = "Guess the MC mob :"
-      elif c == 2:
-            d = ff
-            sent = "Guess the FF character :"
-      else:
-            print("Enter correct option")
-            start()
+    global d, sent
+    print("Welcome Users")
+    print("1. Guess the mob" "\n2. Guess the character")
+    c = int(input("Enter your choice :"))
+    if c == 1:
+        d = mobs
+        sent = "Guess the MC mob :"
+    elif c == 2:
+        d = ff
+        sent = "Guess the FF character :"
+    else:
+        print("Enter correct option")
+        start()
+
 
 def guessgame():
-                  pick = d[random.randint(0,len(d))]   #guessed mob
-                  while True:
-                              w = "y"
-                              guess = input(sent)
-                              t = guess.lower()
-                              print()
-                              if t == pick[0].lower():
-                                          print("Yay! You have guessed right")
-                                          print(pick[0],"was the guess")
-                                          break
-                              elif guess == "kill":   #only for debugging
-                                      break
-                              elif guess == "esc":
-                                      print(pick[0])
-                              elif guess == "list":
-                                      print(d)
-                              for n in range(0,len(d)):
-                                                if t == d[n][0].lower():  #check if guess is in database
-                                                      w = "x"
-                                                      gueset=d[n]
-                                                      for i in range(1,5):       #Quality matching
-                                                            if pick[i]==gueset[i]:
-                                                                  print(gueset[i], "MATCHED")
-                                                            elif pick[i]!=gueset[i]:
-                                                                  print(gueset[i], "NOT MATCHED")
-                              if w == "y":
-                                    print("INVALID CHARACTER")
-                              print("Try Again")
+    pick = d[random.randint(0, len(d))]  # guessed mob
+    while True:
+        w = "y"
+        guess = input(sent)
+        t = guess.lower()
+        print()
+        if t == pick[0].lower():
+            print("Yay! You have guessed right")
+            print(pick[0], "was the guess")
+            break
+        elif guess == "kill":  # only for debugging
+            break
+        elif guess == "esc":
+            print(pick[0])
+        elif guess == "list":
+            print(d)
+        for n in range(0, len(d)):
+            if t == d[n][0].lower():  # check if guess is in database
+                w = "x"
+                gueset = d[n]
+                for i in range(1, 5):  # Quality matching
+                    if pick[i] == gueset[i]:
+                        print(gueset[i], "MATCHED")
+                    elif pick[i] != gueset[i]:
+                        print(gueset[i], "NOT MATCHED")
+        if w == "y":
+            print("INVALID CHARACTER")
+        print("Try Again")
 
 
 start()
 guessgame()
-
-
-
-
-
-
-
