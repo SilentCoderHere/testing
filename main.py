@@ -20,13 +20,13 @@ mobs = [
     ["Silverfish", "Beast", "Cave", "Experience", "Burrowing"],
     ["Vex", "Humanoid", "Overworld", "Rare", "Flying"],
     ["Ravager", "Beast", "Overworld", "Rare", "Walking"],
-  ["Stray", "Undead", "Overworld", "Item", "Walking"],
+    ["Stray", "Undead", "Overworld", "Item", "Walking"],
     ["Piglin", "Humanoid", "Nether", "Item", "Walking"],
     ["Piglin Brute", "Humanoid", "Nether", "Rare", "Walking"],
     ["Hoglin", "Beast", "Nether", "Item", "Walking"],
-  ["Warden", "Undead", "Cave", "Special", "Walking"],
+    ["Warden", "Undead", "Cave", "Special", "Walking"],
     ["Evoker", "Humanoid", "Overworld", "Special", "Walking"],
-  ["Vindicator", "Humanoid", "Overworld", "Item", "Walking"],
+    ["Vindicator", "Humanoid", "Overworld", "Item", "Walking"],
     ["Illusioner", "Humanoid", "Overworld", "None", "Teleporting"],
     ["Cave Spider", "Beast", "Cave", "Item", "Walking"],
     ["Spider", "Beast", "Overworld", "Experience", "Walking"],
@@ -36,7 +36,7 @@ mobs = [
 ]
 ff = [
     ["Alok", "Street", "Active", "Healing", "SMG"],
- ["K", "Mystic", "Active", "Healing", "AR"],
+    ["K", "Mystic", "Active", "Healing", "AR"],
     ["Chrono", "Futuristic", "Active", "Defense", "Sniper"],
     ["Skyler", "Corporate", "Active", "Damage", "Shotgun"],
     ["Wukong", "Mythic", "Active", "Stealth", "SMG"],
@@ -115,31 +115,5 @@ def guessgame():
         print("Try Again")
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 start()
 guessgame()
-
-
-
-
-
-
-
-
-
-
-
-
-
