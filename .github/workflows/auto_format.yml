@@ -54,9 +54,11 @@ jobs:
             if [[ "$file" == *.py ]]; then
               echo "🐍 Formatting Python: $file"
               black "$file"
-            elif [[ "$file" == *.* ]]; then
-              echo "🧹 Formatting other: $file"
-              prettier --write "$file" || true
+            elif [[ "$file" =~ \.(js|jsx|ts|tsx|css|scss|html|json|md|yaml|yml)$ ]]; then
+              echo "🧹 Formatting with Prettier: $file"
+              prettier --write "$file"
+            else
+              echo "⏭️  Skipping unsupported file: $file"
             fi
           done
 
